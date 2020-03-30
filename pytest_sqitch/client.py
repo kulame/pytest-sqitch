@@ -44,7 +44,6 @@ def mysql(request):
     #. Get django config
     #. Connect to mysql server.
     #. Drop database before tests
-    #. set sqitch
     #. Create database.
     #. Use proper database.
     #. Drop database after tests.
@@ -70,12 +69,9 @@ def mysql(request):
                             charset=charset,
                             cursorclass=pymysql.cursors.DictCursor)
     with connection.cursor() as cursor:
-        cursor.execute("DROP DATABASE IF EXISTS %s" % sqitch_config)
-        cursor.execute('DROP DATABASE IF EXISTS %s' % mysql_db)
         sql = ''' CREATE DATABASE {name}
             DEFAULT CHARACTER SET {charset}
         '''.format(name=mysql_db, charset=charset)
-        print(sql)
         cursor.execute(sql)
         cursor.execute('USE %s' % mysql_db)
         subprocess.run(["sqitch","deploy"],cwd=sqitch_file)
@@ -83,8 +79,8 @@ def mysql(request):
 
     def drop_database():
         with connection.cursor() as cursor:
+            cursor.execute("DROP DATABASE IF EXISTS %s" % sqitch_config)
             cursor.execute('DROP DATABASE IF EXISTS %s' % mysql_db)
-
     request.addfinalizer(drop_database)
 
     return connection
