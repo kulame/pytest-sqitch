@@ -20,6 +20,7 @@ setup(
     maintainer_email='kulasama@foxmail.com',
     license='MIT',
     url='https://github.com/kulame/pytest-sqitch',
+    packages=['pytest_sqitch'],
     description='sqitch for pytest',
     long_description=read('README.rst'),
     py_modules=['pytest_sqitch'],
