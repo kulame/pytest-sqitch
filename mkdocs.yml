@@ -1,0 +1,10 @@
+site_name: pytest-sqitch
+site_description: sqitch for pytest
+site_author: kula
+
+theme: readthedocs
+
+repo_url: https://github.com/kulame/pytest-sqitch
+
+pages:
+- Home: index.md
