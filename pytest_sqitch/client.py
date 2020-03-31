@@ -1,3 +1,4 @@
+#coding:utf8
 import pytest
 import pymysql.cursors
 import pathlib
@@ -57,12 +58,12 @@ def mysql(request):
     sqitch_file = _setup_sqitch([settings.BASE_DIR])
     sqitch_config = "test_sqitch"
     subprocess.run(["sqitch", "config", "core.registry", sqitch_config],cwd=sqitch_file)
-    origin_db = settings.DATABASES['default']['NAME'] 
-    mysql_db = "test_{name}".format(name=origin_db)
+    conf = settings.DATABASES['default']
+    mysql_db = conf['TEST']['NAME']
     charset = 'utf8mb4'
 
     settings.DATABASES['default']['NAME'] = mysql_db
-    conf = settings.DATABASES['default']
+   
     connection = pymysql.connect(host=conf['HOST'],
                             user=conf["USER"],
                             password=conf["PASSWORD"],
