@@ -70,6 +70,8 @@ def mysql(request):
                             charset=charset,
                             cursorclass=pymysql.cursors.DictCursor)
     with connection.cursor() as cursor:
+        cursor.execute("DROP DATABASE IF EXISTS %s" % sqitch_config)
+        cursor.execute('DROP DATABASE IF EXISTS %s' % mysql_db)
         sql = ''' CREATE DATABASE {name}
             DEFAULT CHARACTER SET {charset}
         '''.format(name=mysql_db, charset=charset)
