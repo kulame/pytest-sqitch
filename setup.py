@@ -13,7 +13,7 @@ def read(fname):
 
 setup(
     name='pytest-sqitch',
-    version='0.1.0',
+    version='0.1.1',
     author='kula',
     author_email='kulasama@foxmail.com',
     maintainer='kula',
